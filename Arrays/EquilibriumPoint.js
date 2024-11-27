@@ -10,25 +10,32 @@
     O(n)/O(1)        
  */
 
-function EquilibriumPoint(array){
-    let leftSum=0, rightSum = 0, position = -1;
+function EquilibriumPoint(array) {
+  let leftSum = 0,
+    rightSum = 0,
+    position = -1;
 
-    array.forEach(element => {
-        rightSum += element;
-    });
+  // Calculate the total sum of the array
+  array.forEach((element) => {
+    rightSum += element;
+  });
 
-    array.forEach((element,index) => {
-        rightSum -=element;
-        if(leftSum == rightSum){
-            position = index + 1;
-            console.log(`The position of the equilibrium point is at index ${position}`);
-            return;
-        };
-        leftSum += element;
-    });
-    if(leftSum!=rightSum) {
-        console.log("No Equilibrium point,hence the result is: "+ position);
-    } 
+  // Traverse the array and find the equilibrium point
+  for (let index = 0; index < array.length; index++) {
+    rightSum -= array[index]; // Exclude current element from rightSum
+    if (leftSum === rightSum) {
+      position = index + 1; // Equilibrium index is 1-based, so add 1
+      console.log(
+        `The position of the equilibrium point is at index ${position}`
+      );
+      return; // Exit after finding the equilibrium point
+    }
+    leftSum += array[index]; // Add current element to leftSum
+  }
+
+  // If no equilibrium point was found, return a message
+  console.log("No equilibrium point found, hence the result is: " + position);
 }
-let array = [1,2,3,5,4,-1];
-EquilibriumPoint(array)
+
+let array = [1, 2, 3, 4, -1];
+EquilibriumPoint(array);
