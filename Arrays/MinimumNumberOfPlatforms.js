@@ -13,28 +13,30 @@
  * Time Complexity: O(N * log N), One traversal O(n) of both the array is needed after sorting O(N * log N).
 	Auxiliary space: O(1), As no extra space is required.
  */
-function MinimumPlatforms(){
-    let  numberOfTrains = 6; 
-    let arr = [0900, 0940, 0950, 1100, 1500, 1800].sort();
-    let dep = [0910, 1200, 1120, 1130, 1900, 2000].sort();
-    const n = arr.length, m = dep.length;
-    let i = 1, j = 0;
-    let minPlatforms = 1, neededPlatforms = 1;
-    
-    while(i < m && j < n){
-        if(arr[i] < dep[j]){
-            minPlatforms += 1;
-            i++;
-    
-            if(minPlatforms > neededPlatforms){
-                neededPlatforms = minPlatforms;
-            };
-        }
-        else{
-            minPlatforms--;
-            j++;
-        }
-    };
-    console.log(neededPlatforms);
-};
+function MinimumPlatforms() {
+  let numberOfTrains = 6;
+  let arr = [900, 940, 950, 1100, 1500, 1800].sort();
+  let dep = [910, 1200, 1120, 1130, 1900, 2000].sort();
+  const n = arr.length,
+    m = dep.length;
+  let i = 1,
+    j = 0;
+  let minPlatforms = 1,
+    neededPlatforms = 1;
+
+  while (i < m && j < n) {
+    if (arr[i] < dep[j]) {
+      minPlatforms += 1;
+      i++;
+
+      if (minPlatforms > neededPlatforms) {
+        neededPlatforms = minPlatforms;
+      }
+    } else {
+      minPlatforms--;
+      j++;
+    }
+  }
+  console.log(neededPlatforms);
+}
 MinimumPlatforms();
