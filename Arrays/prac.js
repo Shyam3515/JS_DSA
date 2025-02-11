@@ -1,27 +1,13 @@
-let arr = [23, 4, 17, 13, 5, 9, 6];
-let maxL = arr[arr.length - 1];
-let leaders = [];
-
-// for (const ele of arr) {
-//   console.log(ele);
-// }
-
-for (let i = arr.length - 1; i >= 0; i--) {
-  const element = arr[i];
-  if (element >= maxL) {
-    maxL = element;
-    leaders.push(maxL);
+let matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+let output = [];
+for (let i = 0; i < matrix.length; i++) {
+  for (let j = 0; j < matrix[i].length; j++) {
+    output.push(matrix[i][j]);
   }
+  console.log(...output);
+  output = [];
 }
-console.log(leaders.reverse());
-
-let k = arr.length - 1,
-  i = 0;
-while (k >= Math.floor(arr.length / 2)) {
-  let temp = arr[k];
-  arr[k] = arr[i];
-  arr[i] = temp;
-  k--;
-  i++;
-}
-console.log(arr, Math.floor(arr.length / 2));

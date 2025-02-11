@@ -7,66 +7,91 @@ Algorithm :
 */
 
 class Node {
-    constructor(value) {
-        this.value = value;
-        this.next = null;
-    }
-};
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
 
 class LinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = this.head;
-        this.length = 0;
-    };
+  constructor() {
+    this.head = null;
+    this.tail = this.head;
+    this.length = 0;
+  }
 
-    push(value) {
-        const newNode = new Node(value);
-        if (!this.head) {
-            this.head = newNode;
-            this.tail = newNode;
-        }
-        else {
-            this.tail.next = newNode;
-            this.tail = newNode;
-        }
-        this.length++;
+  push(value) {
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
+    return newNode; // Return new node for intersection use
+  }
+
+  intersection(l1, l2) {
+    let h1 = l1.head;
+    let h2 = l2.head;
+
+    let length1 = this.findLength(l1);
+    let length2 = this.findLength(l2);
+    let diff = Math.abs(length1 - length2);
+
+    // Move the pointer of the longer list ahead by `diff` nodes
+    if (length1 > length2) {
+      for (let i = 0; i < diff; i++) {
+        h1 = h1.next;
+      }
+    } else {
+      for (let i = 0; i < diff; i++) {
+        h2 = h2.next;
+      }
     }
 
-    intersection(l1, l2) {
-        let h1 = l1.head;
-        let h2 = l2.head;
+    // Move both pointers together until they meet
+    while (h1 !== null && h2 !== null) {
+      if (h1 === h2) {
+        // Check reference, not value
+        console.log("Intersection Point is: " + h1.value);
+        return;
+      }
+      h1 = h1.next;
+      h2 = h2.next;
+    }
 
-        let length1 = myLinkedList.findLength(l1);
-        let length2 = myLinkedList.findLength(l2);
-        let diff = length1 > length2 ? length1 - length2 : length2 - length1;
+    console.log("There is no intersection point...");
+  }
 
-        //Moving diff nodes in longer linked list.
-        let flag = 0;
-        let counter = 0;
-        if (l1 > l2) {
-            while (counter < diff) {
-                h1 = h1.next;
-                counter++;
-            }
-        }
-        else {
-            while (counter < diff) {
-                h2 = h2.next;
-                counter++;
-            }
-        }
-        //checking intersection...
-        while (h1 != null && h2 != null) {
-            if (h1.value == h2.value) {
-                console.log("Intersection Point is: " + h1.value);
-                flag = 1;
-                break;
-            }
-            h1 = h1.next;
-            h2 = h2.next;
-        }
-        if (flag == 0) {
-            console.log("There is no Intersection point...");
-        }
-    };
+  //Finding the length
+  findLength(ll) {
+    let temp = ll.head;
+    let counter = 0;
+    while (temp) {
+      temp = temp.next;
+      counter++;
+    }
+    return counter;
+  }
+}
+// Create first linked list
+const myLinkedList1 = new LinkedList();
+const node1 = myLinkedList1.push(1);
+const node2 = myLinkedList1.push(2);
+const node3 = myLinkedList1.push(3);
+const node4 = myLinkedList1.push(4);
+const node5 = myLinkedList1.push(5);
+
+// Create second linked list
+const myLinkedList2 = new LinkedList();
+const node6 = myLinkedList2.push(7);
+const node7 = myLinkedList2.push(8);
+
+// Creating intersection: Link node7's `next` to node3 from myLinkedList1
+node7.next = node3;
+
+// Call intersection function
+myLinkedList1.intersection(myLinkedList1, myLinkedList2); //Intersection Point is: 3
