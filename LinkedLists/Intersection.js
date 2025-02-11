@@ -70,26 +70,3 @@ class LinkedList {
             console.log("There is no Intersection point...");
         }
     };
-
-    //Finding the length
-    findLength(ll) {
-        let temp = ll.head;
-        let counter = 0;
-        while (temp) {
-            temp = temp.next;
-            counter++;
-        };
-        return counter;
-    }
-}
-const myLinkedList = new LinkedList();
-myLinkedList.push(1);
-myLinkedList.push(2);
-myLinkedList.push(3);
-myLinkedList.push(4);
-myLinkedList.push(5);
-const myLinkedList2 = new LinkedList();
-myLinkedList2.push(7);
-myLinkedList2.push(8);
-myLinkedList2.push(9);
-myLinkedList.intersection(myLinkedList, myLinkedList2)
